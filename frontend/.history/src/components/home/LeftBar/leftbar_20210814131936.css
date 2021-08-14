@@ -1,0 +1,24 @@
+.listMusics:hover{
+    overflow-y: scroll;
+}
+.music{
+    margin: 10px 2px;
+
+    align-items: center;
+
+}
+.music>p{
+    font-size: 1.5rem;
+    margin: 0 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+}
+#resize-leftBar{
+    position: absolute;
+    right: 0;
+    transform: translateX(10%);
+    top: 50%;
+    
+}

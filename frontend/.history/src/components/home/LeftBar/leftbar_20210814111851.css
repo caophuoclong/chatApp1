@@ -1,0 +1,8 @@
+.listMusics:hover{
+    overflow-y: scroll;
+}
+.music{
+    margin: 10px 2px;
+
+    align-items: center;
+}

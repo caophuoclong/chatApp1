@@ -1,0 +1,30 @@
+.listMusics:hover{
+    overflow-y: scroll;
+}
+.music{
+    margin: 10px 2px;
+
+    align-items: center;
+
+}
+.music>p{
+    font-size: 1.5rem;
+    margin: 0 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+}
+#left-panel{
+    position: absolute;
+    height: 100%;
+}
+#left-panel::after{
+    content: '';
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    cursor: ew-resize;
+}
