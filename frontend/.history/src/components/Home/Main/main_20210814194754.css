@@ -1,0 +1,33 @@
+.status-shape {
+    position: absolute;
+    top: 80%;
+    left: 70%;
+
+}
+
+.chat-show {
+    height: 88%;
+
+}
+
+.time-message {
+    float: right;
+    font-size: 5px;
+}
+
+.message {
+    clear: both;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 2px 5px;
+}
+
+.message-receiver {
+    float: left;
+}
+
+.message-sender {
+    float: right;
+    text-align: right;
+}

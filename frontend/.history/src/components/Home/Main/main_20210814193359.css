@@ -1,0 +1,22 @@
+.status-shape {
+    position: absolute;
+    top: 80%;
+    left: 70%;
+
+}
+
+.chat-show {
+    height: 88%;
+}
+
+.message {
+    clear: both;
+}
+
+.message-receiver {
+    float: right;
+}
+
+.message-sender {
+    float: left;
+}
