@@ -1,0 +1,9 @@
+
+POST http://localhost:8000/auth/register HTTP/1.0\r\n
+{Content-Type: x-www-form-urlencoded}
+{
+    username: "caophuoclong",
+    password: "516489",
+    email: "caophuoclong@gmail.com",
+}
+#

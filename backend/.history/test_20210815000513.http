@@ -1,0 +1,8 @@
+
+POST http://localhost:8000/auth/register HTTP/1.0\r\n
+{
+    username: "caophuoclong",
+    password: "516489",
+    email: "caophuoclong@gmail.com",
+}
+#
