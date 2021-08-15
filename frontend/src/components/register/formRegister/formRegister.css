@@ -1,0 +1,10 @@
+.form{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.register{
+    background: rgb(173,159,101);
+background: linear-gradient(90deg, rgba(173,159,101,1) 15%, rgba(173,157,101,1) 31%, rgba(173,148,101,1) 46%, rgba(194,138,123,1) 75%, rgba(232,223,229,1) 98%);
+}
