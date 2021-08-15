@@ -1,0 +1,26 @@
+.listMusics:hover {
+    overflow-y: scroll;
+}
+
+.music {
+    margin: 10px 2px;
+    align-items: center;
+
+}
+
+
+
+#resize-leftBar {
+    position: absolute;
+    right: 0;
+    transform: translateX(10%);
+    bottom: 5%;
+    color: #dddbdb;
+
+}
+
+
+
+#left-bar-friend {
+    overflow-y: scroll;
+}

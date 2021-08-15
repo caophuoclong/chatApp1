@@ -1,0 +1,48 @@
+.listMusics {
+    overflow-y: scroll;
+}
+
+.music {
+    margin: 10px 2px;
+    align-items: center;
+
+}
+
+
+.selected {
+    background-color: rgb(190, 190, 190);
+}
+
+#resize-leftBar {
+    position: absolute;
+    right: 0;
+    transform: translateX(10%);
+    bottom: 5%;
+    color: #dddbdb;
+
+}
+
+#left-bar-friend {
+    overflow: hidden;
+}
+
+#left-bar-friend:hover {
+    overflow-y: scroll;
+}
+
+.img-music {
+    position: relative;
+}
+
+.img-music::after {
+    content: "";
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    z-index: 99;
+}
