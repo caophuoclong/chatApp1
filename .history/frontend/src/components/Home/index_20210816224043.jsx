@@ -218,7 +218,7 @@ function Home(props) {
       dispatch(action);
     }
   }
-  const socket = useMemo(() => io("https://api-server-intern.herokuapp.com/",{autoConnect: false}), []);
+  const socket = useMemo(() => io("http://localhost:8000",{autoConnect: false}), []);
   return (
     <div className="flex flex-start h-screen">
       <LeftBar onSubmit={handleSubmit} deleteMusic={deleteMusic} listFriend={listFriends} listRoom={listRooms} findUser={onFindUser} chatNow={handleChatNow}/>
