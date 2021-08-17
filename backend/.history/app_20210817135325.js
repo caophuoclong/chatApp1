@@ -38,17 +38,15 @@ io.use((socket, next) => {
 io.on("connection", (socket) => {
   const users = [];
   for (let [id, socket] of io.of("/").sockets) {
+    console.log(id, socket);
+
     users.push({
       userID: id,
       username: socket.username,
     });
   }
-  socket.emit("users", users);
-  socket.broadcast.emit("user connected", {
-    userID: socket.id,
-    username: socket.username,
-  });
   console.log(`${socket.username} is connected`);
+  socket.emit("users", users);
   socket.on("private message", ({ messaging, to }) => {
     const addFromSocket = async (messaging) => {
       const { content, time, user, userOwner } = messaging;

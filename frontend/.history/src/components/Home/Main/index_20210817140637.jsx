@@ -43,6 +43,7 @@ function Main(props) {
     setCurrentUser({...currentUser, messages:[...x]});
     let id;
     listUser.forEach(value=>{if(value.username === currentUser.username) id = value.userID});
+    console.log(listUser);
     console.log(currentUser.username);
     socket.emit("private message",{
       messaging,
@@ -50,18 +51,17 @@ function Main(props) {
     })
     e.target.reset();
   }
-  socket.on("users",(data)=>{
-    setListUser(data);
+  socket.on("users",({userId, username})=>{
+    const x = [...listUser];
+    x.push({userId, username});
+    setListUser(x);
   })
   socket.on("private message",({messaging, from})=>{
-    let x = [...currentUser.messages];
-    x.push(messaging);
-    
-    setCurrentUser({...currentUser, messages:[...x]});  })
-  socket.on("user connected",({userID, username})=>{
+    alert(messaging.content);
+  })
+  socket.on("user connected",({userId, username})=>{
     const x = [...listUser];
-    console.log(x);
-    x.push({userID, username});
+    x.push({userId, username});
     setListUser(x);
   })
   return (

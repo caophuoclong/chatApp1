@@ -13,7 +13,7 @@ function Main(props) {
   const [online, setOnline] = useState(false);
   const currentUser1 = useSelector(state => state.currentUser);
   const userInfo = useSelector(state => state.userInfor);
-  const [listUser, setListUser] = useState([]);
+  const [listUser, setListUser] = useState();
   const [currentUser, setCurrentUser] = useState({
     id: '',
     avatar: '',
@@ -41,29 +41,19 @@ function Main(props) {
     x.push(messaging);
     
     setCurrentUser({...currentUser, messages:[...x]});
-    let id;
-    listUser.forEach(value=>{if(value.username === currentUser.username) id = value.userID});
-    console.log(currentUser.username);
+
+    console.log(listUser);
+
     socket.emit("private message",{
       messaging,
       to: id
     })
     e.target.reset();
   }
-  socket.on("users",(data)=>{
+  socket.on("users",data=>{
     setListUser(data);
   })
-  socket.on("private message",({messaging, from})=>{
-    let x = [...currentUser.messages];
-    x.push(messaging);
-    
-    setCurrentUser({...currentUser, messages:[...x]});  })
-  socket.on("user connected",({userID, username})=>{
-    const x = [...listUser];
-    console.log(x);
-    x.push({userID, username});
-    setListUser(x);
-  })
+  console.log(listUser);
   return (
     <div className="w-2/3 mr-2 flex flex-wrap">
       <div className="chat-area h-5/6 w-full pb-2">

@@ -11,8 +11,6 @@ const friendRoute = require("./routes/friend.route");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-const User = require("./models/user.model");
-const message = require("./models/messaging.model");
 const connectDb = require("./database");
 connectDb();
 const corsOptions = {
@@ -43,51 +41,10 @@ io.on("connection", (socket) => {
       username: socket.username,
     });
   }
-  socket.emit("users", users);
-  socket.broadcast.emit("user connected", {
-    userID: socket.id,
-    username: socket.username,
-  });
   console.log(`${socket.username} is connected`);
+  socket.emit("users", users);
   socket.on("private message", ({ messaging, to }) => {
-    const addFromSocket = async (messaging) => {
-      const { content, time, user, userOwner } = messaging;
-      try {
-        if (user && userOwner) {
-          const newMessage = new message({ content, time, user, userOwner });
-          await newMessage.save();
-          const sender = userOwner;
-          const receiver = user;
-          await User.findByIdAndUpdate(
-            {
-              _id: sender,
-            },
-            {
-              $addToSet: {
-                messages: newMessage,
-              },
-            },
-            { upsert: true, new: true }
-          );
-          await User.findByIdAndUpdate(
-            {
-              _id: receiver,
-            },
-            {
-              $addToSet: {
-                messages: newMessage,
-              },
-            },
-            { upsert: true, new: true }
-          );
-        } else {
-          return;
-        }
-      } catch (error) {
-        throw error;
-      }
-    };
-    addFromSocket(messaging);
+    console.log(messaging, to);
     socket.to(to).emit("private message", {
       messaging,
       from: socket.id,

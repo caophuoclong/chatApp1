@@ -38,6 +38,7 @@ io.use((socket, next) => {
 io.on("connection", (socket) => {
   const users = [];
   for (let [id, socket] of io.of("/").sockets) {
+    console.log(id, socket.username);
     users.push({
       userID: id,
       username: socket.username,

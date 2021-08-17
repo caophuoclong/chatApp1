@@ -30,7 +30,35 @@ module.exports = {
       }
     });
   },
-
+  addFromSocket: (req, res, next) => {
+    const messaging = req.body;
+    const newMessage = new message({ messaging });
+    newMessage.save();
+    const sender = messaging.userOwner;
+    const receiver = messaging.user;
+    await User.findByIdAndUpdate(
+      {
+        _id: sender,
+      },
+      {
+        $addToSet: {
+          messages: newMessage,
+        },
+      },
+      { upsert: true, new: true }
+    );
+    await User.findByIdAndUpdate(
+      {
+        _id: receiver,
+      },
+      {
+        $addToSet: {
+          messages: newMessage,
+        },
+      },
+      { upsert: true, new: true }
+    );
+  },
   get: async (req, res, next) => {
     const token = req.headers["authorization"];
     jwt.verify(token, serectKey, async (error, data) => {

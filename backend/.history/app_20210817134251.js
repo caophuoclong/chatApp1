@@ -43,49 +43,38 @@ io.on("connection", (socket) => {
       username: socket.username,
     });
   }
-  socket.emit("users", users);
-  socket.broadcast.emit("user connected", {
-    userID: socket.id,
-    username: socket.username,
-  });
   console.log(`${socket.username} is connected`);
+  socket.emit("users", users);
   socket.on("private message", ({ messaging, to }) => {
+    console.log(messaging, to);
     const addFromSocket = async (messaging) => {
       const { content, time, user, userOwner } = messaging;
-      try {
-        if (user && userOwner) {
-          const newMessage = new message({ content, time, user, userOwner });
-          await newMessage.save();
-          const sender = userOwner;
-          const receiver = user;
-          await User.findByIdAndUpdate(
-            {
-              _id: sender,
-            },
-            {
-              $addToSet: {
-                messages: newMessage,
-              },
-            },
-            { upsert: true, new: true }
-          );
-          await User.findByIdAndUpdate(
-            {
-              _id: receiver,
-            },
-            {
-              $addToSet: {
-                messages: newMessage,
-              },
-            },
-            { upsert: true, new: true }
-          );
-        } else {
-          return;
-        }
-      } catch (error) {
-        throw error;
-      }
+      const newMessage = new message({ content, time, user, userOwner });
+      await newMessage.save();
+      const sender = userOwner;
+      const receiver = user;
+      await User.findByIdAndUpdate(
+        {
+          _id: sender,
+        },
+        {
+          $addToSet: {
+            messages: newMessage,
+          },
+        },
+        { upsert: true, new: true }
+      );
+      await User.findByIdAndUpdate(
+        {
+          _id: receiver,
+        },
+        {
+          $addToSet: {
+            messages: newMessage,
+          },
+        },
+        { upsert: true, new: true }
+      );
     };
     addFromSocket(messaging);
     socket.to(to).emit("private message", {

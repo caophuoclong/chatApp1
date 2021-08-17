@@ -51,13 +51,15 @@ function Main(props) {
     e.target.reset();
   }
   socket.on("users",(data)=>{
+    // const x = [...listUser];
+    // x.push({userID, username});
+    // console.log(x);
+
     setListUser(data);
   })
   socket.on("private message",({messaging, from})=>{
-    let x = [...currentUser.messages];
-    x.push(messaging);
-    
-    setCurrentUser({...currentUser, messages:[...x]});  })
+    alert(messaging.content);
+  })
   socket.on("user connected",({userID, username})=>{
     const x = [...listUser];
     console.log(x);
